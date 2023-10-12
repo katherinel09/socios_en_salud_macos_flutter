@@ -3,135 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_kit/survey_kit.dart';
 
-class CustomStep extends StatelessWidget {
-  final String label;
-  final String content;
-  final int index;
-  final int currentStep;
-  final VoidCallback onFinishedClicked;
-  final VoidCallback onStepCancelClicked;
-  final VoidCallback onStepContinueClicked;
-
-  const CustomStep({
-    super.key,
-    required this.label,
-    required this.content,
-    required this.index,
-    required this.currentStep,
-    required this.onFinishedClicked,
-    required this.onStepCancelClicked,
-    required this.onStepContinueClicked,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // IntrinsicHeight will make sure we don't have render drawing issues when infinite height is available.
-    return IntrinsicHeight(
-      child: Row(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 15,
-                    backgroundColor: currentStep >= index
-                        ? Colors.orange
-                        : Colors.grey.shade300,
-                    child: currentStep <= index
-                        ? Text(
-                            '${index + 1}',
-                            style: const TextStyle(color: Colors.black),
-                          )
-                        : const Icon(
-                            Icons.check,
-                          ),
-                  ),
-                  // Last Index hence the Extended Line Wont Appear.
-                  index == 2
-                      ? Container()
-                      : Expanded(
-                          child: Container(
-                            height: 35,
-                            width: 2.5,
-                            color: Colors.orange,
-                          ),
-                        )
-                ],
-              ),
-            ],
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: currentStep > 1 == true ? 0 : 32, left: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    label,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  // Hide Everything except Heading when we are not on same Index.
-                  if (currentStep == index)
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  if (currentStep == index)
-                    Text(
-                      content,
-                    ),
-                  if (currentStep == index)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: currentStep == 2
-                                ? onFinishedClicked
-                                : onStepContinueClicked,
-                            child: currentStep < 2
-                                ? const Text('Continue')
-                                : const Text('Finish'),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          TextButton(
-                            onPressed:
-                                currentStep == 0 ? null : onStepCancelClicked,
-                            child: Text(
-                              'Back',
-                              style: TextStyle(
-                                  color: currentStep == 0
-                                      ? Colors.grey
-                                      : Colors.blue),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class SesSurvey extends StatefulWidget {
-  const SesSurvey({Key? key}) : super(key: key);
-
   @override
   _SesSurveyState createState() => _SesSurveyState();
 }
@@ -140,39 +12,138 @@ class _SesSurveyState extends State<SesSurvey> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromRGBO(233, 158, 82, 1)),
-        useMaterial3: true,
-      ),
       home: Scaffold(
         body: Container(
-          alignment: Alignment.center,
-          child: FutureBuilder<Task>(
-            future: getJsonTask(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done &&
-                  snapshot.hasData &&
-                  snapshot.data != null) {
-                final task = snapshot.data!;
-                return SurveyKit(
-                  onResult: (SurveyResult result) {
-                    print(result.finishReason);
-                    final jsonResult =
-                        result.toJson(); // print the json-formatted results
-                    print(jsonResult);
-                    Navigator.pushNamed(context, '/');
-                  },
-                  task: task,
-                  showProgress: true,
-                  localizations: {
-                    'cancel': 'Cancel',
-                    'next': 'Next',
-                  },
-                );
-              }
-              return CircularProgressIndicator.adaptive();
-            },
+          color: Colors.white,
+          child: Align(
+            alignment: Alignment.center,
+            child: FutureBuilder<Task>(
+              future: getJsonTask(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData &&
+                    snapshot.data != null) {
+                  final task = snapshot.data!;
+                  return SurveyKit(
+                    onResult: (SurveyResult result) {
+                      print(result.finishReason);
+                      Navigator.pushNamed(context, '/');
+                    },
+                    task: task,
+                    showProgress: true,
+                    localizations: {
+                      'cancel': 'Cancel',
+                      'next': 'Next',
+                    },
+                    themeData: Theme.of(context).copyWith(
+                      primaryColor: Color.fromRGBO(233, 158, 82, 1),
+                      appBarTheme: const AppBarTheme(
+                        color: Colors.white,
+                        iconTheme: IconThemeData(
+                          color: Colors.orange,
+                        ),
+                        titleTextStyle: TextStyle(
+                          color: Colors.orange,
+                        ),
+                      ),
+                      iconTheme: const IconThemeData(
+                        color: Colors.cyan,
+                      ),
+                      textSelectionTheme: TextSelectionThemeData(
+                        cursorColor: Colors.orange,
+                        selectionColor: Colors.orange,
+                        selectionHandleColor: Colors.orange,
+                      ),
+                      outlinedButtonTheme: OutlinedButtonThemeData(
+                        style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all(
+                            Size(150.0, 60.0),
+                          ),
+                          side: MaterialStateProperty.resolveWith(
+                            (Set<MaterialState> state) {
+                              if (state.contains(MaterialState.disabled)) {
+                                return BorderSide(
+                                  color: Colors.grey,
+                                );
+                              }
+                              return BorderSide(
+                                color: Colors.orange,
+                              );
+                            },
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          textStyle: MaterialStateProperty.resolveWith(
+                            (Set<MaterialState> state) {
+                              if (state.contains(MaterialState.disabled)) {
+                                return Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      color: Colors.grey,
+                                    );
+                              }
+                              return Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.copyWith(
+                                    color: Colors.orangeAccent,
+                                  );
+                            },
+                          ),
+                        ),
+                      ),
+                      textButtonTheme: TextButtonThemeData(
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(
+                            Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  color: Colors.orange,
+                                ),
+                          ),
+                        ),
+                      ),
+                      textTheme: TextTheme(
+                        displayMedium: TextStyle(
+                          fontSize: 28.0,
+                          color: Colors.black,
+                        ),
+                        headlineSmall: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.black,
+                        ),
+                        bodyMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                        titleMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      inputDecorationTheme: InputDecorationTheme(
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      colorScheme: ColorScheme.fromSwatch(
+                        primarySwatch: Colors.cyan,
+                      )
+                          .copyWith(
+                            onPrimary: Colors.white,
+                          )
+                          .copyWith(background: Colors.white),
+                    ),
+                    surveyProgressbarConfiguration: SurveyProgressConfiguration(
+                      backgroundColor: Colors.white,
+                    ),
+                  );
+                }
+                return CircularProgressIndicator.adaptive();
+              },
+            ),
           ),
         ),
       ),
@@ -184,74 +155,173 @@ class _SesSurveyState extends State<SesSurvey> {
       id: TaskIdentifier(),
       steps: [
         InstructionStep(
-          title: 'Hola, soy el ChatBot para Socios en Salud. ',
-          text: '¡Mucho gusto! 😊',
-          buttonText: 'Lista',
+          title: 'Hola',
+          text: 'Soy el ChatBot para Socios en Salud. Mucho gusto 😊',
+          buttonText: 'Comienza',
         ),
         QuestionStep(
-            title: 'Antes de continuar, ingrese su fecha de nacimiento.',
-            answerFormat: DateAnswerFormat(
-                maxDate: DateTime.now(), minDate: DateTime(1900, 1))),
+          title: 'Cuantos años tienes?',
+          isOptional: false,
+          answerFormat: ScaleAnswerFormat(
+            step: 1,
+            minimumValue: 0,
+            maximumValue: 100,
+            defaultValue: 30,
+            minimumValueDescription: '0',
+            maximumValueDescription: '100',
+          ),
+        ),
         QuestionStep(
           title: 'Tuberculosis',
           text: '¿Usted recibió tratamiento para tuberculosis?',
+          isOptional: false,
           answerFormat: BooleanAnswerFormat(
-            positiveAnswer: 'Sí',
+            positiveAnswer: 'Yes',
             negativeAnswer: 'No',
             result: BooleanResult.POSITIVE,
           ),
         ),
         QuestionStep(
-          title: 'Inicio de tratamiento',
+          title: 'Tuberculosis',
           text:
-              '¿Cuál es el mes y año de inicio de su último tratamiento para Tuberculosis?',
-          answerFormat: DateAnswerFormat(
-              maxDate: DateTime.now(), minDate: DateTime(1900, 1)),
+              '¿Usted tiene menos de tres meses o tres meses de haber salido de ALTA de tratamiento TB?',
+          isOptional: false,
+          answerFormat: BooleanAnswerFormat(
+            positiveAnswer: 'Yes',
+            negativeAnswer: 'No',
+            result: BooleanResult.POSITIVE,
+          ),
         ),
         QuestionStep(
-            title: 'Fin de tratamiento',
-            text:
-                '¿Cuál es el mes y año de inicio de su último tratamiento para Tuberculosis?',
-            answerFormat: DateAnswerFormat(
-                maxDate: DateTime.now(), minDate: DateTime(1900, 1))),
+          text:
+              'Cuál es el mes de inicio de su último tratamiento para Tuberculosis',
+          isOptional: false,
+          answerFormat: MultipleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'enero', value: 'enero'),
+              TextChoice(text: 'febrero', value: 'febrero'),
+              TextChoice(text: 'marzo', value: 'marzo'),
+              TextChoice(text: 'abril', value: 'abril'),
+              TextChoice(text: 'mayo', value: 'mayo'),
+              TextChoice(text: 'junio', value: 'junio'),
+              TextChoice(text: 'julio', value: 'julio'),
+              TextChoice(text: 'agosoto', value: 'agosoto'),
+              TextChoice(text: 'septiembre', value: 'septiembre'),
+              TextChoice(text: 'octubre', value: 'octubre'),
+              TextChoice(text: 'noviembre', value: 'noviembre'),
+              TextChoice(text: 'diciembre', value: 'diciembre'),
+            ],
+          ),
+        ),
         QuestionStep(
-            title: 'COVID',
-            text:
-                '¿Usted tiene un resultado POSITIVO de prueba para COVID-19 en los últimos 20 días?',
-            answerFormat: BooleanAnswerFormat(
-              positiveAnswer: 'Sí',
-              negativeAnswer: 'No',
-              result: BooleanResult.POSITIVE,
-            )),
+          text:
+              '¿Cuál es el año de inicio de su último tratamiento para Tuberculosis?',
+          isOptional: false,
+          answerFormat: ScaleAnswerFormat(
+            step: 1,
+            minimumValue: 1950,
+            maximumValue: 2050,
+            defaultValue: 2000,
+            minimumValueDescription: '1950',
+            maximumValueDescription: '2050',
+          ),
+        ),
+        QuestionStep(
+          title:
+              '¿Cuál es el mes de inicio de su último tratamiento para Tuberculosis?',
+          isOptional: false,
+          answerFormat: MultipleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'enero', value: 'enero'),
+              TextChoice(text: 'febrero', value: 'febrero'),
+              TextChoice(text: 'marzo', value: 'marzo'),
+              TextChoice(text: 'abril', value: 'abril'),
+              TextChoice(text: 'mayo', value: 'mayo'),
+              TextChoice(text: 'junio', value: 'junio'),
+              TextChoice(text: 'julio', value: 'julio'),
+              TextChoice(text: 'agosoto', value: 'agosoto'),
+              TextChoice(text: 'septiembre', value: 'septiembre'),
+              TextChoice(text: 'octubre', value: 'octubre'),
+              TextChoice(text: 'noviembre', value: 'noviembre'),
+              TextChoice(text: 'diciembre', value: 'diciembre'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title:
+              '¿Cuál es el año de inicio de su último tratamiento para Tuberculosis?',
+          isOptional: false,
+          answerFormat: ScaleAnswerFormat(
+            step: 1,
+            minimumValue: 1950,
+            maximumValue: 2050,
+            defaultValue: 2000,
+            minimumValueDescription: '1950',
+            maximumValueDescription: '2050',
+          ),
+        ),
+        QuestionStep(
+          title: 'COVID',
+          text:
+              '¿Usted tiene un resultado POSITIVO de prueba para COVID-19 en los últimos 20 días?',
+          isOptional: false,
+          answerFormat: SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Sí', value: 'Sí'),
+              TextChoice(text: 'No', value: 'No'),
+            ],
+            defaultSelection: TextChoice(text: 'No', value: 'No'),
+          ),
+        ),
+        QuestionStep(
+          text:
+              'Marque una de las siguientes alternativas para poder valorar si presenta sensación de falta de aire:',
+          isOptional: false,
+          answerFormat: SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(
+                  text:
+                      'Tan solo me falta el aire al realizar ejercicio intenso.',
+                  value: 'grado_0_de_mMRC'),
+              TextChoice(
+                  text:
+                      'Me falta el aire al andar de prisa en llano, o al subir una pendiente poco pronunciada.',
+                  value: 'grado_1_de_mMRC'),
+              TextChoice(
+                  text:
+                      'No puedo mantener el paso de otras personas de mi misma edad en llano o tengo que detenerme para respirar al andar en llano a mi propio paso.',
+                  value: 'grado_2_de_mMRC'),
+              TextChoice(
+                  text:
+                      'Me detengo para respirar después de andar unos 100 metros o después de andar pocos minutos en llano.',
+                  value: 'grado_3_de_mMRC'),
+              TextChoice(
+                  text:
+                      'Tengo demasiada dificultad respiratoria para salir de casa o me cuesta respirar al vertirme o desvestirme.',
+                  value: 'grado_4_de_mMRC'),
+            ],
+            defaultSelection: TextChoice(
+                text:
+                    'No puedo mantener el paso de otras personas de mi misma edad en llano o tengo que detenerme para respirar al andar en llano a mi propio paso.',
+                value: 'grado_2_de_mMRC'),
+          ),
+        ),
         CompletionStep(
-            stepIdentifier: StepIdentifier(id: DateTime.now().toString()),
-            title: 'Termina',
-            text:
-                'Agradecemos por su participación, lo invitamos a nuestra web de SES. \n https://sociosensalud.org.pe/')
+          stepIdentifier: StepIdentifier(id: '321'),
+          text:
+              'Agradecemos por su participación, lo invitamos a nuestra web de SES. \n https://sociosensalud.org.pe/',
+          title: 'Termina',
+          buttonText: 'Enviar encuesta',
+        ),
       ],
     );
     task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[2].stepIdentifier,
+      forTriggerStepIdentifier: task.steps[6].stepIdentifier,
       navigationRule: ConditionalNavigationRule(
         resultToStepIdentifierMapper: (input) {
           switch (input) {
-            case "Sí":
-              return task.steps[3].stepIdentifier;
-            case "No":
-              return task.steps[7].stepIdentifier;
-            default:
-              return null;
-          }
-        },
-      ),
-    );
-    task.addNavigationRule(
-      forTriggerStepIdentifier: task.steps[3].stepIdentifier,
-      navigationRule: ConditionalNavigationRule(
-        resultToStepIdentifierMapper: (input) {
-          switch (input) {
-            case "Sí":
-              return task.steps[4].stepIdentifier;
+            case "Yes":
+              return task.steps[0].stepIdentifier;
             case "No":
               return task.steps[7].stepIdentifier;
             default:
@@ -264,8 +334,9 @@ class _SesSurveyState extends State<SesSurvey> {
   }
 
   Future<Task> getJsonTask() async {
-    final taskJson = await rootBundle.loadString('assets/ses_survey.json');
+    final taskJson = await rootBundle.loadString('assets/example_json.json');
     final taskMap = json.decode(taskJson);
+
     return Task.fromJson(taskMap);
   }
 }
