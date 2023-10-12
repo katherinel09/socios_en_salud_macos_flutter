@@ -1,0 +1,457 @@
+{
+    "id": "123",
+    "type": "navigable",
+    "rules": [
+        {
+            "type": "conditional",
+            "triggerStepIdentifier": {
+                "id": "7"
+            },
+            "values": {
+                "Yes": "2",
+                "No": "8"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "1"
+            },
+            "destinationStepIdentifier": {
+                "id": "2"
+            }
+        },
+        {
+            "type": "conditional",
+            "triggerStepIdentifier": {
+                "id": "5"
+            },
+            "values": {
+                "enero": "6",
+                "febreo": "6",
+                "marzo": "6",
+                "abril": "6",
+                "mayo": "6",
+                "junio": "6",
+                "julio": "6",
+                "agosoto": "6",
+                "septiembre": "6",
+                "octubre": "6",
+                "noviembre": "6",
+                "diciembre": "6"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "11"
+            },
+            "destinationStepIdentifier": {
+                "id": "7"
+            }
+        }
+    ],
+    "steps": [
+        {
+            "stepIdentifier": {
+                "id": "1"
+            },
+            "type": "intro",
+            "title": "Hola!",
+            "text": "Soy el ChatBot para Socios en Salud. Mucho gusto 😊",
+            "buttonText": "Comienza"
+        },
+        {
+            "stepIdentifier": {
+                "id": "2"
+            },
+            "type": "question",
+            "title": "Cuantos años tienes?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 100,
+                "defaultValue": 30,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "100"
+
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "3"
+            },
+            "type": "question",
+            "title": "Tuberculosis",
+            "text": "¿Usted recibió tratamiento para tuberculosis?",
+            "answerFormat": {
+                "type": "bool",
+                "positiveAnswer": "Yes",
+                "negativeAnswer": "No",
+                "result": "POSITIVE"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "4"
+            },
+            "type": "question",
+            "title": "Tuberculosis",
+            "text": "¿Usted tiene menos de tres meses o tres meses de haber salido de ALTA de tratamiento TB?",
+            "answerFormat": {
+                "type": "bool",
+                "positiveAnswer": "Yes",
+                "negativeAnswer": "No",
+                "result": "POSITIVE"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "5"
+            },
+            "type": "question",
+            "text": "¿Cuál es el mes de inicio de su último tratamiento para Tuberculosis?",
+            "answerFormat": {
+                "type": "single",
+                "textChoices": [
+                    {
+                        "text": "enero",
+                        "value": "enero"
+                    },
+                    {
+                        "text": "febrero",
+                        "value": "febrero"
+                    },
+                    {
+                        "text": "marzo",
+                        "value": "marzo"
+                    },
+                    {
+                        "text": "abril",
+                        "value": "abril"
+                    },
+                    {
+                        "text": "mayo",
+                        "value": "mayo"
+                    },
+                    {
+                        "text": "junio",
+                        "value": "junio"
+                    },
+                    {
+                        "text": "julio",
+                        "value": "julio"
+                    },
+                    {
+                        "text": "agosoto",
+                        "value": "agosoto"
+                    },
+                    {
+                        "text": "septiembre",
+                        "value": "septiembre"
+                    },
+                    {
+                        "text": "octubre",
+                        "value": "octubre"
+                    },
+                    {
+                        "text": "noviembre",
+                        "value": "noviembre"
+                    },
+                    {
+                        "text": "diciembre",
+                        "value": "diciembre"
+                    }
+                ]
+            }
+        },
+                {
+            "stepIdentifier": {
+                "id": "6"
+            },
+            "type": "question",
+            "text": "¿Cuál es el año de inicio de su último tratamiento para Tuberculosis?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 1950,
+                "maximumValue": 2050,
+                "defaultValue": 2000,
+                "minimumValueDescription": "1950",
+                "maximumValueDescription": "2050"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "8"
+            },
+            "type": "question",
+            "text": "¿Cuál es el mes de inicio de su último tratamiento para Tuberculosis?",
+            "answerFormat": {
+                "type": "single",
+                "textChoices": [
+                    {
+                        "text": "enero",
+                        "value": "enero"
+                    },
+                    {
+                        "text": "febrero",
+                        "value": "febrero"
+                    },
+                    {
+                        "text": "marzo",
+                        "value": "marzo"
+                    },
+                    {
+                        "text": "abril",
+                        "value": "abril"
+                    },
+                    {
+                        "text": "mayo",
+                        "value": "mayo"
+                    },
+                    {
+                        "text": "junio",
+                        "value": "junio"
+                    },
+                    {
+                        "text": "julio",
+                        "value": "julio"
+                    },
+                    {
+                        "text": "agosoto",
+                        "value": "agosoto"
+                    },
+                    {
+                        "text": "septiembre",
+                        "value": "septiembre"
+                    },
+                    {
+                        "text": "octubre",
+                        "value": "octubre"
+                    },
+                    {
+                        "text": "noviembre",
+                        "value": "noviembre"
+                    },
+                    {
+                        "text": "diciembre",
+                        "value": "diciembre"
+                    }
+                ]
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "9"
+            },
+            "type": "question",
+            "text": "¿Cuál es el año de inicio de su último tratamiento para Tuberculosis?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 1950,
+                "maximumValue": 2050,
+                "defaultValue": 2000,
+                "minimumValueDescription": "1950",
+                "maximumValueDescription": "2050"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "7"
+            },
+            "type": "question",
+            "title": "COVID",
+            "text": "¿Usted tiene un resultado POSITIVO de prueba para COVID-19 en los últimos 20 días?",
+            "answerFormat": {
+                "type": "single",
+                "textChoices": [
+                    {
+                        "text": "Sí",
+                        "value": "Sí"
+                    },
+                    {
+                        "text": "No",
+                        "value": "No"
+                    }
+                ]
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "12"
+            },
+            "type": "question",
+            "text": "Clic una de las siguientes alternativas para poder valorar si presenta sensación de falta de aire:",
+            "answerFormat": {
+                "type": "single",
+                "otherField": true,
+                "textChoices": [
+                    {
+                        "text": "Tan solo me falta el aire al realizar ejercicio intenso.",
+                        "value": "grado_0_de_mMRC"
+                    },
+                    {
+                        "text": "Me falta el aire al andar de prisa en llano, o al subir una pendiente poco pronunciada.",
+                        "value": "grado_1_de_mMRC"
+                    },
+                    {
+                        "text": "No puedo mantener el paso de otras personas de mi misma edad en llano o tengo que detenerme para respirar al andar en llano a mi propio paso.",
+                        "value": "grado_2_de_mMRC"
+                    },
+                    {
+                        "text": "Me detengo para respirar después de andar unos 100 metros o después de andar pocos minutos en llano.",
+                        "value": "grado_3_de_mMRC"
+                    },
+                    {
+                    	"text": "Tengo demasiada dificultad respiratoria para salir de casa o me cuesta respirar al vertirme o desvestirme.",
+                    	"value": "grado_4_de_mMRC"
+                    }
+                ]
+            }
+        },
+        {
+        	"stepIdentifier": { "id": "13" },
+            "type": "question",
+			"title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q1/7).",
+			"text": "0 => No tengo flema (mucosidad) en el pecho. \n Tengo el pecho completamente lleno de flema (mucosidad).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "14" },
+            "type": "question",
+            "text": "0 => No siento ninguna opresión en el pecho. \n 5 => Siento mucha opresión en el pecho.",
+            "title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q2/7).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "15" },
+            "type": "question",
+            "text": "0 => Cuando subo una pendiente o un tramo de escaleras, no me falta el aire. \n 5 => Cuando subo una pendiente o un tramo de escaleras, me falta mucho el aire.",
+            "title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q3/7).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "16" },
+            "type": "question",
+            "text": "0 => No me siento limitado para realizar actividades domésticas. \n 5 => Me siento muy limitado para realizar actividades domésticas.",
+            "title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q4/7).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "17" },
+            "type": "question",
+            "text": "0 => Me siento seguro al sliar de casa a pesar de affeción pulmonar que padezco \n 5 => No me siento nada seguro al salir de casa debido a la affeción pulmor que padezco.",
+            "title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q5/7).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "18" },
+            "type": "question",
+            "text": "0 => Duermo sin problemas \n 5 => Tengo problemas para dormir debido a la afección pulmonar que padezco.",
+            "title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q6/7).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "19" },
+            "type": "question",
+            "text": "0 => Tengo mucha energía \n 5 => No tengo ninguna energía.",
+            "title": "Seleccione un número en una escala de 0 a 5 para describir su situación actual (Q7/7).",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 5,
+                "defaultValue": 0,
+                "minimumValueDescription": "0",
+                "maximumValueDescription": "5"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "10" },
+            "type": "completion",
+            "text": "Agradecemos por su participación, lo invitamos a nuestra web de SES.",
+            "title": "Termina",
+            "buttonText": "Enviar encuesta"
+        },
+        {
+            "stepIdentifier": {
+                "id": "11"
+            },
+            "type": "question",
+            "title": "Pets",
+            "text": "What type of pet(s) do you have?",
+            "answerFormat": {
+                "type": "multiple",
+                "textChoices": [
+                    {
+                        "text": "Dog",
+                        "value": "Dog"
+                    },
+                    {
+                        "text": "Cat",
+                        "value": "Cat"
+                    },
+                    {
+                        "text": "Fish",
+                        "value": "Fish"
+                    },
+                    {
+                        "text": "Small Animal",
+                        "value": "Small Animal"
+                    }
+                ]
+            }
+        }
+    ]
+}
