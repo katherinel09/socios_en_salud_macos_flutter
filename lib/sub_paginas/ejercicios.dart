@@ -9,11 +9,13 @@ class Ejercicios {
 }
 
 class EjercicioPagina extends StatelessWidget {
+  EjercicioPagina({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercise Page'),
+        title: const Text('Exercise Page'),
       ),
       body: SingleChildScrollView(
         // Wrap the content with SingleChildScrollView
@@ -23,24 +25,24 @@ class EjercicioPagina extends StatelessWidget {
           children: [
             Container(
               color: Colors.green,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Day 1 Exercises'),
-                  Text('Description of exercises for Day 1'),
-                  SizedBox(height: 16),
+                  const Text('Day 1 Exercises'),
+                  const Text('Description of exercises for Day 1'),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
                       // Add navigation to the YouTube video for Day 1
                     },
-                    child: Text('Watch Day 1 Video'),
+                    child: const Text('Watch Day 1 Video'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   // Insert data from cells
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: ejerciciosVerdes.length,
                     itemBuilder: (context, index) {
                       final exerciseName = ejerciciosVerdes[index].name;
@@ -72,7 +74,7 @@ class EjercicioPagina extends StatelessWidget {
                         if (termsToBold.contains(term)) {
                           textSpans.add(TextSpan(
                             text: term,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ));
                         } else {
                           textSpans.add(TextSpan(
@@ -104,23 +106,23 @@ class EjercicioPagina extends StatelessWidget {
             ),
             Container(
               color: Colors.orange,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Day 2 Exercises'),
-                  Text('Description of exercises for Day 2'),
-                  SizedBox(height: 16),
+                  const Text('Day 2 Exercises'),
+                  const Text('Description of exercises for Day 2'),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
                       // Add navigation to the YouTube video for Day 2
                     },
-                    child: Text('Watch Day 2 Video'),
+                    child: const Text('Watch Day 2 Video'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: ejerciciosAnaranjados.length,
                     itemBuilder: (context, index) {
                       //VARIACION DE EJERCICIOS EN CASA SESION
@@ -136,7 +138,7 @@ class EjercicioPagina extends StatelessWidget {
                         if (termsToBold.contains(term)) {
                           textSpans.add(TextSpan(
                             text: term,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ));
                         } else {
                           textSpans.add(TextSpan(
@@ -168,23 +170,23 @@ class EjercicioPagina extends StatelessWidget {
             ),
             Container(
               color: Colors.lightBlue,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Day 3 Exercises'),
-                  Text('Description of exercises for Day 3'),
-                  SizedBox(height: 16),
+                  const Text('Day 3 Exercises'),
+                  const Text('Description of exercises for Day 3'),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
                       // Add navigation to the YouTube video for Day 3
                     },
-                    child: Text('Watch Day 3 Video'),
+                    child: const Text('Watch Day 3 Video'),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: ejerciciosAzules.length,
                     itemBuilder: (context, index) {
                       return Row(

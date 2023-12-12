@@ -17,8 +17,8 @@ class ChatCompletionPage extends StatefulWidget {
 class _ChatCompletionPageState extends State<ChatCompletionPage> {
   String? answer;
   bool loading = false;
-  final testPrompt =
-      'Which Disney character famously leaves a glass slipper behind at a royal ball?';
+  
+  final testPrompt = 'Which Disney character famously leaves a glass slipper behind at a royal ball?';
 
   final List<QuestionAnswer> questionAnswers = [];
 
